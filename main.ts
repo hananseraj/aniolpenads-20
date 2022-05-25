@@ -1,5 +1,5 @@
 function LevelUp () {
-    tiles.setCurrentTilemap(tilemap`level1`)
+    tiles.setCurrentTilemap(tilemap`level6`)
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
@@ -134,7 +134,7 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     )
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
-    game.over(true, effects.confetti)
+    LevelUp()
 })
 controller.right.onEvent(ControllerButtonEvent.Released, function () {
     animation.runImageAnimation(
@@ -390,12 +390,12 @@ controller.left.onEvent(ControllerButtonEvent.Released, function () {
     false
     )
 })
-scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile3`, function (sprite, location) {
-    game.over(false)
-})
 info.onCountdownEnd(function () {
     game.over(false, effects.dissolve)
 })
+function MACARENA () {
+    mySprite.setPosition(50, 0)
+}
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     mySprite,
@@ -524,8 +524,8 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     )
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
-    mySprite.destroy(effects.halo, 500)
     info.changeLifeBy(-1)
+    MACARENA()
 })
 info.onLifeZero(function () {
     game.over(false)
